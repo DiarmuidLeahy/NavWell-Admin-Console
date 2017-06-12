@@ -28,10 +28,6 @@ angular.module('navwellAdminApp')
 
     $scope.isActive = false;
 
-    // $scope.toggleActive = function() {
-    //   $scope.isActive = !$scope.isActive;
-    // };
-
   	$scope.showStep = function(step){
 
       
