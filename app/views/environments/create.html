@@ -38,7 +38,7 @@
 		  	<span class="glyphicon glyphicon-triangle-top" ng-click="selectShape('triangle')" ng-class="{'selected': steps_config.selected_shape == 'triangle'}"></span>
 		  	<span class="glyphicon glyphicon-stop" ng-click="selectShape('square')" ng-class="{'selected': steps_config.selected_shape == 'square'}"> </span>
 		  	<span class="glyphicon glyphicon-minus" ng-click="selectShape('rectangle')" ng-class="{'selected': steps_config.selected_shape == 'rectangle'}"> </span>
-		  	<span ng-click="selectShape('octagon')" ng-class="{'selected': steps_config.selected_shape == 'octagon'}"><img style ="color:#919191;height:60px;width:60px" src="../images/octagon-xxl.png"/></span> 		<!--removed this until fully implemented-->
+		  	<!-- <span ng-click="selectShape('octagon')" ng-class="{'selected': steps_config.selected_shape == 'octagon'}"><img style ="color:#919191;height:60px;width:60px" src="../images/octagon-xxl.png"/></span> 			Removed this until fully implemented-->
 		  	<br/>
 		  	<div class="alert alert-danger" role="alert" ng-if="steps_config.selected_shape != 'None' && (steps_config.steps_done[2])">If you change the shape of the environment, your cues and platform will be lost</div>
 		  	<div class="text-right">

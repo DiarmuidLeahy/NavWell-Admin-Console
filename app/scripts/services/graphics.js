@@ -33,12 +33,14 @@ angular.module('navwellAdminApp')
                 var starty = 0.9;
                 break;
         }
+
         var x = startx;
         var y = starty;
-        var coors = []; //array to store x,y coordinates of points
+        var coordinates = []; //array to store x,y coordinates of points
         var count = 1;
+
         do {
-            coors.push([x,y]);
+            coordinates.push([x,y]);
             var x_temp = x;
             var y_temp = y;
             x = (x_temp * Math.cos(theta)) + (y * Math.sin(theta));
@@ -47,38 +49,36 @@ angular.module('navwellAdminApp')
             count++;
         } while (count <= sides);
 
-        return coors;
-    }    //Derri end
+        return coordinates;
+    }
 
     var polygons = {
+
+        triangle:  [[-0.9, -0.9],
+                    [0, 0.9],
+                    [0.9, -0.9]],
+
         rectangle: [[-0.9, -0.5],       //Not a regular Polygon so points are explicitly listed
                     [-0.9, 0.5],
                     [0.9, 0.5],
                     [0.9, -0.5]],
-        //triangle: getPolygonPoints(3),  //replaced the method below (Derri)
-    	triangle: [ [-0.9, -0.9],
-    				[0, 0.9],
-    				[0.9, -0.9]],
-    	square: getPolygonPoints(4),   //replaced the method below (Derri)
-        // square: [[-0.9, -0.9],
-        //          [-0.9, 0.9],
-        //          [0.9, 0.9],
-        //          [0.9, -0.9]],
+
+    	           //Points can either be explicitly listed as above or alternatively, the desired number of sides can be passed to "getPolygonPoints" which will generate them automatically
+                   //The shape must be a REGULAR polygon
+    	square: getPolygonPoints(4),   
         pentagon: getPolygonPoints(5),
         hexagon: getPolygonPoints(6),
         heptagon: getPolygonPoints(7),
-        octagon: getPolygonPoints(8),     //Derri
+        octagon: getPolygonPoints(8),
         nonagon: getPolygonPoints(9),
         decagon: getPolygonPoints(10)
-
-        };
-    //console.log(polygons);
+    };
 
     var circle = {
 		center: [0, 0], 
 		radius: 0.9,
 		radius_power_2: 0.81 // Precalculated for efficiency
-	};
+	}; //Derri end
 
     var BORDER_ERR = 0.075;
     var BODER_ADJ = 0.05;
@@ -94,23 +94,21 @@ angular.module('navwellAdminApp')
 
     var checkInside = function(arena_type, x, y) {           //MAJOR CHANGES MADE HERE (Derri)
 
-    	if (arena_type === 'circle'){
-    		//Need to check the radius of the circle vs the distance between 0, 0 and the point
-    		//x^2 + y ^ 2 < radius ^ 2
+    	if (arena_type === 'circle') {
 
+    		//Need to check the radius of the circle vs the distance between 0, 0 and the point x^2 + y ^ 2 < radius ^ 2
     		return (x * x + y * y) < circle.radius_power_2;
-    	} /* Derri start */
-    	else {//if (arena_type === 'square' || arena_type === 'rectangle' || arena_type === 'octagon' || arena_type === 'triangle' || arena_type === 'hundred') {
+
+    	} else { //if (arena_type === 'square' || arena_type === 'rectangle' || arena_type === 'octagon' || arena_type === 'triangle' || arena_type === 'hundred') {
 
             //Implementing the ray casting algorithm for determining if a point is within a given polygon.
             //The algorithm "draws" a horizontal line from the point across the positive x-axis.
             //If the line crosses the border of the polygon an odd number of times, the point is outside the polygon.
             function isInside(point, vs) {
-                console.log(vs);
             
                 var x = point[0], y = point[1];
-            
                 var inside = false;
+                
                 for (var i = 0, j = vs.length - 1; i < vs.length; j = i++) {
 
                     var xi = vs[i][0], yi = vs[i][1];
