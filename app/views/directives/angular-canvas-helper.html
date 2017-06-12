@@ -1,0 +1,21 @@
+<div class="arena-container" width="{{canvas_size}}" style="width: {{canvas_size}}px; margin: auto;">
+	<canvas ng-show="arena_config.arena_type != 'none'" id="environment-canvas" width="{{canvas_size}}" height="{{canvas_size}}"></canvas>
+	<div class="alert alert-info mtm" role="alert" ng-if="arena_config.err_click_border"><small>You should click on the border of the arena</small></div>
+	<div ng-if="arena_config.display_mode == 'results-q'" class="quadrant q1">
+		{{arena_config.quadrants[0] | number:0}}%
+	</div>
+	<div ng-if="arena_config.display_mode == 'results-q'" class="quadrant q2">
+		{{arena_config.quadrants[1] | number:0}}%
+	</div>
+	<div ng-if="arena_config.display_mode == 'results-q'" class="quadrant q3">
+		{{arena_config.quadrants[2] | number:0}}%
+	</div>
+	<div ng-if="arena_config.display_mode == 'results-q'" class="quadrant q4">
+		{{arena_config.quadrants[3] | number:0}}%
+	</div>
+	<div class="heatmap-container" ng-style="heatMapStyle" ng-show="arena_config.display_mode == 'results-hm'">
+		<!-- div id="heatmap" class="heatmap" style="width: {{canvas_size}}px; height: {{canvas_size}}px;" -->
+		<div id="heatmap" class="heatmap" style="width: 100%; height: 100%;">
+	</div>
+	</div>
+</div>

@@ -1,0 +1,131 @@
+<div class="row">
+	<div class="col-xs-12 text-right">
+		<h2> New Experiment</h2>
+	</div>	
+</div>
+<hr class="info" />
+<div class="row">
+	<div class="col-xs-12 col-sm-offset-6 col-sm-6" ng-class="{'has-error': steps_config.name_error}">
+		<input type="text" class="form-control single-line-input-text " ng-model="name" placeholder="Experiment Name" >
+	</div>
+</div>
+<div class="row create-steps experiment">
+	<div class="col-sm-6">
+		<h3>Steps</h3>
+		<ul class="list-group">
+			<!-- Step 1 -->
+			<li class="list-group-item" ng-class="{'active': steps_config.current_step == 0, 'done': steps_config.steps_done[0] && steps_config.current_step != 0}" ng-click="showStep(0)">1. Select environment<span ng-if="steps_config.steps_done[0]" class="badge glyphicon glyphicon-ok"> </span> <span ng-if="steps_config.steps_done[0]"><br/>&nbsp;&nbsp;&nbsp;&nbsp;<small><i>{{steps_config.selected_env_name}}</i></small></span></li>
+			<li class="list-group-item" ng-if="steps_config.current_step == 0">Select the environment on the list that you wish to use for this experiment
+				<div class="alert alert-danger mts" role="alert" ng-if="steps_config.selected_env_index != -1 && (steps_config.steps_done[1])"><small>If you change the change the environment you will have to set the starting position again</small></div>
+			</li>
+			</li>
+
+			  <!-- Step 2 -->
+			 <li class="list-group-item" ng-class="{'active': steps_config.current_step == 1, 'done': steps_config.steps_done[1] && steps_config.current_step != 1}" ng-click="showStep(1)">2. Set Start Position<span ng-if="steps_config.steps_done[1]" class="badge glyphicon glyphicon-ok"> </span></li>
+			 <li class="list-group-item" ng-if="steps_config.current_step == 1">Click the point in the arena where you want to place the start position for the <b>first trial</b> of the experiment. 
+			 <div class="text-right" ng-if="arena_config.goal != false">
+		  		<a href="" ng-click="setStartPositionDone()"><small>Next</small></a>
+		  	</div></li>
+
+			 <!-- Step 3 -->
+			  <li class="list-group-item" ng-class="{'active': steps_config.current_step == 2, 'done': steps_config.steps_done[2] && steps_config.current_step != 2}" ng-click="showStep(2)">3. Trials<span ng-if="steps_config.steps_done[2]" class="badge">{{trials.length}}</span></li>
+			  <li class="list-group-item" ng-if="steps_config.current_step == 2">
+				  <p><small><i>Add new trials to the experiment:</i></small></p>
+				  <div>
+				  	<div class="form-inline trials-form">
+					  <div class="form-group" ng-class="{'has-error': steps_config.error_duration}">
+					    <label for="duration">Duration <small>(seconds)</small></label><br/>
+					    <input type="text" class="form-control" id="duration" ng-model="new_trial.duration" placeholder="Duration">
+					  </div>
+					  <div class="form-group" ng-class="{'has-error': steps_config.error_rest}">
+					    <label for="rest">Rest <small>(seconds)</small></label><br/>
+					    <input type="text" class="form-control" id="rest" ng-model="new_trial.rest" placeholder="Rest">
+					  </div>
+					  <span class="glyphicon glyphicon-plus-sign" ng-click="addTrial()"> </span>
+					</div>
+					<div class="checkbox">
+					    <label>
+					      <input type="checkbox" ng-click="checkOther('retention')" ng-model="new_trial.retention"> Is Retention? <!-- Need to write a function that checks if the other checkbox is clicked 
+					      																										Don't need this anymore because I've set up the addTrial() function to check if both are checked. If they are, the trial will not be added. Just need to display an error message now.-->
+					    </label>
+					  </div>
+					  <div class="checkbox">
+					  <!-- need to ensure that both of these boxes can't be checked together Derri-->
+					    <label>
+					      <input type="checkbox" ng-click="checkOther('visible')" ng-model="new_trial.visible"> Is Visible?
+					    </label>
+					  </div>
+				  </div>
+				  <p class="text-success"><small><i>If you want to change the starting position for this trial, click on the point in the arena where you want to set it. </i></small></p>
+				  <div class="text-right">
+			  		<a href="" ng-click="addTrialsDone()"><small><small>Next</small></small></a>
+			  	  </div>
+			  	  <div class="alert alert-danger mts text-center" role="alert" ng-if="new_trial.retentionAndVisible">
+			  	  	<small>A trial cannot be both visible &amp; retention. Visible trials show the participant where the platform is and retention trials make the platform inactive</small>
+			  	  </div>
+			  	  <div class="alert alert-danger mts text-center" role="alert" ng-if="steps_config.error_trials_count"><small>Please add at least one trial to the experiment</small></div>
+			  </li>
+
+			  <!-- Step 4 -->
+			  <li class="list-group-item" ng-class="{'active': steps_config.current_step == 3}" ng-click="showStep(3)">4. Finish</li>
+			  <li class="list-group-item" ng-if="steps_config.current_step == 3">Click here to save your new experiment when you are done: 
+			  <div class="alert alert-danger mts text-center" role="alert" ng-if="steps_config.name_error"><small>Please add a name for the new experiment</small></div>
+		   <div class="alert alert-danger mts text-center" role="alert" ng-if="steps_config.save_error"><small>There was an error saving the experiment. Please try again!</small></div>
+			  <div class="text-center">
+			  	<button type="button" class="btn btn-info" ng-click="saveExperiment()">Save</button>
+			  </div>
+			  </li>
+		</ul>
+	</div>
+	<div class="col-sm-6 create-experiment-side" ng-if="steps_config.current_step == 0">
+		<div class="table-responsive">
+		  <table class="table table-striped">
+		    <thead>
+		    	<tr>
+		    		<th>Name</th>
+		    		<th>Shape</th>
+		    		<th>Select</th>
+		    	</tr>
+		    </thead>
+		    <tbody>
+		    	<tr ng-repeat="env in environmentsList track by $index">
+		    		<td>{{env.name}}</td>
+		    		<td>{{getType(env.arena_type)}}</td>
+		    		<td><a href="" ng-click="selectEnvironment($index, env.name)">Select</a></td>
+		    	</tr>
+		    </tbody>
+		  </table>
+		</div>
+	</div>
+	<div class="col-sm-6 create-experiment-side" ng-if="steps_config.current_step >= 1">
+		<div class="text-center">
+			<angular-canvas-helper data-canvas-size="200"/>
+		</div>
+		<div class="alert alert-info mts text-center" role="alert" ng-if="steps_config.current_step == 1"><small>You can replace the starting position by clicking again</small></div>
+		<div ng-if="steps_config.current_step >= 2">
+		<h4>Trials</h4>
+		<p ng-if="trials.length == 0"><small><i>No trials</i></small></p>
+		<div ng-if="trials.length > 0" class="table-responsive">
+		  <table class="table table-striped">
+		    <thead>
+		    	<tr>
+		    		<th>#</th>
+		    		<th>Duration</th>
+		    		<th>Rest</th>
+		    		<th>Remove</th>
+		    	</tr>
+		    </thead>
+		    <tbody>
+		    	<tr ng-repeat="trial in trials track by $index" ng-class="{'info': trial.retention, 'danger': trial.visible, 'success': steps_config.selected_trial == $index}" ng-click="showTrial($index)">
+		    		<td>{{$index + 1}}</td>
+		    		<td>{{trial.duration}} seconds</td>
+		    		<td>{{trial.rest}} seconds</td>
+		    		<td><a href="" ng-click="removeTrial($index)">Remove</a></td>
+		    	</tr>
+		    </tbody>
+		   </table>
+		   <p class="text-info"><small><i>Click on the trial to see its starting position</i></small></p>
+		 </div>
+		 </div>
+	</div>
+</div>

@@ -1,0 +1,93 @@
+<div class="row">
+	<div class="col-sm-1 header-info hidden-xs">
+		<b>Id: </b> 
+	</div>
+	<div class="col-xs-12 col-sm-5 header-info">
+		<b class="visible-xs-inline">Id: </b>{{participant.id}}
+	</div>
+	<div class="col-xs-12 col-sm-6 text-right">
+		<h2>{{participant.first_name}} {{participant.last_name}}</h2>
+	</div>	
+</div>
+<hr class="info" />
+<div class="row">
+	<div class="col-xs-2 col-sm-1">
+		<b>Notes: </b>
+	</div>
+	<div class="col-xs-10 col-sm-11">
+		<div class="participant-description" ng-class="{'full-display': !display.see_more}">{{participant.notes}}</div>
+		<a href="" class="pull-right" ng-if="participant.notes.length > 250 && display.see_more" ng-click="seeMoreNotes()"> See more &#187;</a><!--kcor - not sure if keylor should of put && here, its higlighted in red so there may be an error which needs to be addressed here--> 
+	</div>
+</div>
+<div class="row details-section">
+	<div class="col-sm-6">
+		<h3>Experiments</h3>
+		<div class="alert alert-info" role="alert" ng-if="participant.experiments.length == 0">There are no experiments for this participant.</div>
+		<div class="table-responsive" ng-if="participant.experiments.length > 0">
+		  <table class="table table-striped">
+		    <thead>
+		    	<tr>
+		    		<th>3D/2D</th>
+		    		<th>Name</th>
+		    		<th>Results</th>
+		    		<th>Date Taken</th>
+		    	</tr>
+		    </thead>
+		    <tbody>
+		    	<tr ng-repeat="experiment in participant.experiments track by $index" ng-click="showExperimentSummary($index)" ng-class="{'success': display.selected_experiment == $index}">
+
+		    		<td ng-if="!experiment.attempted">-</td><!--kcor - if the experiment has not yet been attempted -->
+		    		<td ng-if="experiment.attempted === experiment.third_dimension">3D</td><!-- kcor - THE ONLY WAY TD CAN BE FALSE IS IF IT WAS ATTEMPTED so if it was attempted and is still true then it must be 3d-->
+		    		<td ng-if="experiment.third_dimension === false">2D</td><!--kcor - THE ONLY WAY TD CAN BE FALSE IS IF IT WAS ATTEMPTED-->
+		    		
+		    		
+		    		<td ng-if="experiment.attempted"><a href="#/participants/{{participant.id}}/experiment/{{experiment._id}}">{{experiment.name}}</a></td>
+		    		<td ng-if="!experiment.attempted">{{experiment.name}}</td>
+		    		<td ng-if="experiment.attempted">{{experiment.goal_found}}/{{experiment.total_trials}}</td>
+		    		<td ng-if="!experiment.attempted">-</td>
+		    		<td ng-if="experiment.attempted">{{experiment.date_taken | date:'MM/dd/yyyy'}}</td>
+		    		<td ng-if="!experiment.attempted">-</td>
+		    	</tr>
+		    </tbody>
+		   </table>
+		</div>
+		<a class="btn btn-primary pull-right" href="" role="button" ng-click="showAddExperiment()">Add</a>
+	</div>
+	<div class="col-sm-6" ng-if="display.add_experiment">
+		<h3>Add Experiment</h3>
+		<div class="table-responsive">
+		  <table class="table table-striped">
+		    <thead>
+		    	<tr>
+		    		<th>Name</th>
+		    		<th>Trials</th>
+		    		<th>Add</th>
+		    	</tr>
+		    </thead>
+		    <tbody>
+		    	<tr ng-repeat="exp in experiments track by $index">
+		    		<td>{{exp.name}}</td>
+		    		<td>{{exp.trials.length}}</td>
+		    		<td><a href="" ng-click="addExperiment($index)">Add</a></td>
+		    	</tr>
+		    </tbody>
+		   </table>
+		</div>
+		<div class="alert alert-danger mts text-center" role="alert" ng-if="display.error_add_exp"><small>There was an error adding the experiment. Please try again!</small></div>
+		<a class="btn btn-default pull-right" href="" role="button" ng-click="display.add_experiment = false">Close</a>
+	</div>
+	<div class="col-sm-6">
+		<div class="alert mtm alert-warning" role="alert" ng-if="display.selected_experiment >= 0 && !participant.experiments[display.selected_experiment].attempted">The selected experiment has not been taken by the participant</div><!--kcor - not sure if keylor should of put && here, its higlighted in red so there may be an error which needs to be addressed here--> 
+	</div>
+	<div class="col-sm-6 text-center experiment-summary" ng-if="display.selected_experiment >= 0 && participant.experiments[display.selected_experiment].attempted"><!--kcor - not sure if keylor should of put && here, its higlighted in red so there may be an error which needs to be addressed here--> 
+		<div class="btn-group" role="group">
+		  <button type="button" ng-click="setArenaDisplayMode('results-hm')" class="btn btn-default" ng-class="{'btn-success': arena_config.display_mode == 'results-hm'}">Heat map</button>
+		  <button type="button" ng-click="setArenaDisplayMode('results-path')" class="btn btn-default" ng-class="{'btn-success': arena_config.display_mode == 'results-path'}">Paths</button>
+		  <button type="button" ng-click="setArenaDisplayMode('results-q')" class="btn btn-default" ng-class="{'btn-success': arena_config.display_mode == 'results-q'}">Quadrant</button>
+		</div>
+		<div class="mts">
+			<angular-canvas-helper data-canvas-size="200"/>
+		</div>
+		<a href="#/participants/{{participant.id}}/experiment/{{participant.experiments[display.selected_experiment]._id}}" class="pull-right"><small>Details &#187;</small></a>
+	</div>
+</div>

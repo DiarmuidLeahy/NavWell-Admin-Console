@@ -1,0 +1,86 @@
+.shapes {
+
+  font-size: 60px;
+  text-align: center; 
+  color: #bbb;
+
+  div {
+    font-size: 12px;
+  }
+
+  .circle {
+    &.selected {
+      background: #333;
+      color: #333;
+    }
+  }
+
+  span {
+    &.selected {
+      color: #333;
+    }
+  }
+}
+
+.glyphicon-adjust {
+  &.circle {
+    border-radius: 30px;
+    background: #bbb;
+  }
+}
+
+.cue-size {
+
+  span {
+    display: inline-block;
+    width: 20%;
+    cursor: pointer;
+  }
+
+  .selected {
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 15px;
+  }
+}
+
+.cue-types {
+  font-size: 28px;
+  color: #bbb;
+
+  .circle {
+    background-color: #bbb;
+  }
+
+  .selected {
+    color: #333333;
+
+    &.circle {
+      background: #333333;
+    }
+  }
+}
+
+.intensity {
+
+  margin-top: 15px;
+  margin-bottom: 15px;
+
+  > div {
+    display: inline-block;
+  }
+
+  .control {
+    color: #f0ad4e;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .progress {
+    margin-bottom: 0;
+
+    .progress-bar {
+      background-color: #f0ad4e;
+    }
+  }
+}

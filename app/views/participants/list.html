@@ -1,0 +1,40 @@
+<div class="row">
+	<div class="col-xs-12 col-sm-6">
+		<input type="text" class="form-control single-line-input-text" ng-model="search" placeholder="Search" >
+	</div>
+	<div class="col-xs-12 col-sm-6 text-right">
+		<h2>Participants</h2>
+	</div>	
+</div>
+<hr/>
+<div class="row">
+	<div class="col-xs-12">
+		<div class="table-responsive">
+		  <table class="table table-striped">
+		    <thead>
+		    	<tr>
+		    		<th>ID</th>
+		    		<th>NAME</th>
+		    		<th>EXPERIMENTS</th>
+		    		<th>ATTEMPTED</th>
+		    		<th>DETAILS</th>
+		    	</tr>
+		    </thead>
+		    <tbody>
+		    	<tr ng-repeat="part in participantsList | filter:search">
+		    		<td>{{part.id}}</td>
+		    		<td>{{part.first_name}} {{part.last_name}}</td>
+		    		<td>{{part.experiments.length}}</td>
+		    		<td>{{countAttemptedExperiments(part)}}</td>
+		    		<td><a href="#/participants/{{part.id}}">View</a></td>
+		    	</tr>
+		    </tbody>
+		  </table>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12 text-right">
+		<a class="btn btn-primary" href="#/participants/create" role="button">Create Participant</a>
+	</div>
+</div>

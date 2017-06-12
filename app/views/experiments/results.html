@@ -1,0 +1,75 @@
+<div class="row">
+	<div class="col-xs-12 col-sm-6">
+		<input type="text" class="form-control single-line-input-text" ng-model="search" placeholder="Search" ><!--/*kcor - for some reason the original value in ng-model here was "d"-->
+	</div>
+	<div class="col-xs-12 col-sm-6 text-right">
+		<h2>{{name}} - Results</h2>
+	</div>	
+</div>
+<hr/>
+<div class="row">
+	<div class="col-xs-12">
+		<div class="table-responsive">
+		  <table class="table table-striped">
+		    <thead>
+		    	<tr>
+		    		<th>3D/2D</th><!--kcor - added a column-->
+		    		<th>PARTICIPANT</th>
+		    		<th>GOAL</th>
+		    		<th>AVG. TIME</th>
+		    		<th>AVG. PATH</th>
+		    		<th>GOAL Q%</th>
+		    		<TH>COMPARE</TH>
+		    	</tr>
+		    </thead>
+		    <tbody>
+		    	<tr ng-repeat="res in results | filter:search track by $index">
+		    		<td>{{res.third_dimension}}</td><!--kcor- experiment.third_dimension has a different structure than participants.experiments.third_dimension with only one boolean set to true by default defining all results dimensions so it is of no use-->
+		    		<td><a href="#/participants/{{res.participant_id}}">{{res.participant_name}}</a></td>
+		    		<td>{{getTotalGoals(res.trials)}}</td>
+		    		<td>{{res.avg_time | number:2}} seconds</td>
+		    		<td>{{res.avg_path}}</td>
+		    		<td>{{res.goal_q | number:2}}%</td>
+		    		<td><a href="" ng-click="compareResult($index)">Compare</a></td>
+		    		<td><a href="/#/participants/{{res.participant_id}}/experiment/{{exp_id}}" target="_blank">Details</a></td>
+		    	</tr>
+		    </tbody>
+		  </table>
+		</div>
+	</div>
+	<div class="col-xs-12">
+		<a class="btn btn-primary pull-right" href="{{download_base}}experiments/{{exp_id}}/results/csv">Download as CSV</a>
+	</div>
+</div>
+<div class="row mtm">
+	<div class="col-xs-12">
+		<h3>Compare</h3>
+		<p class="text-center" ng-if="compare.length == 0"><small><i>Select 'Compare' in two or more Participants in order to compare the detailed results</i></small></p>
+	</div>
+	<div class="col-sm-6" ng-repeat="part in compare track by $index">
+		<h4>{{part.participant_name}} - {{part.third_dimension}}</h4>
+		<div class="table-responsive">
+		  <table class="table table-striped">
+		    <thead>
+		    	<tr>
+		    		<th>#</th>
+		    		<th>Duration</th>
+		    		<th>Goal Found</th>
+		    		<th>Path length</th>
+		    		<th>Goal Q%</th>
+		    	</tr>
+		    </thead>
+		    <tbody>
+		    	<tr ng-repeat="trial in part.trials" ng-click="selectRow($index)" ng-class="{'info': $index == selectedTrial}">
+		    		<td>{{$index + 1}}</td>
+		    		<td>{{trial.duration | number:0}}s</td>
+		    		<td>{{trial.goal_found ? 'YES' : 'NO'}}</td>
+		    		<td>{{trial.path_length}}</td>
+		    		<td>{{trial.goal_q | number:0}}%</td>
+		    	</tr>
+		    </tbody>
+		  </table>
+		</div>
+		<a href="" class="pull-right" ng-click="remove($index)"><small><i>Remove</i></small></a>
+	</div>
+</div>

@@ -1,0 +1,60 @@
+<div class="row">
+	<div class="col-xs-12 text-right">
+		<h2>{{exp.name}}</h2>
+	</div>	
+</div>
+<hr/>
+<div class="row details-section">
+	<div class="col-sm-6">
+		<h3>{{exp.environment.name}}</h3>
+		<angular-canvas-helper data-canvas-size="300"/>
+	</div>
+	<div class="col-sm-6">
+		<h3>Trials</h3>
+		<div class="table-responsive">
+		  <table class="table table-striped">
+		    <thead>
+		    	<tr>
+		    		<th>#</th>
+		    		<th>Duration</th>
+		    		<th>Rest</th>
+		    	</tr>
+		    </thead>
+		    <tbody>												<!-- Derri -  if the trial is "visible", append the warning class --> 
+			    <tr ng-repeat="trial in exp.trials track by $index" ng-class="{'info': trial.retention, 'danger': trial.visible, 'success': selected_trial == $index}" ng-click="showTrial($index)">
+			    	<td>{{$index + 1}}</td>
+			    	<td>{{trial.duration}} seconds</td>
+			    	<td>{{trial.rest}} seconds</td>
+			    </tr>
+		    </tbody>
+		   </table>
+		   <p class="text-info"><small><i>Click on the trial to see its starting position</i></small></p>
+		</div>
+	</div>
+</div>
+<div class="row mtm">
+	<div class="col-sm-3">
+		Retention trials: {{retention_trials_count}}
+	</div>
+	<div class="col-sm-2">
+		Visible trials: {{visible_trials_count}}
+	</div>
+	<div class="col-sm-4">
+		Total participants: <b>{{exp.total_participants}}</b> - <a href="#/experiments/{{exp._id}}/results">Results</a>
+	</div>
+	<div class="col-sm-3">
+		<a href="{{clone_url}}">Clone</a> - <a href="" ng-click="show_delete = true">Delete</a>
+	</div>
+	<div class="col-sm-12" ng-if="show_delete">
+		<div class="panel panel-danger mts">
+			<div class="panel-heading">Delete experiment</div>
+		  	<div class="panel-body">
+		    	Are you sure you want to delete this experiment? Current participants won't be affected but it will not be available for use again.
+		    	<div class="pull-right mts">
+		    	<button type="button" class="btn btn-danger" ng-click="deleteExperiment()">Delete</button>
+		  		<a class="btn btn-default" ng-click="hideDelete()">Cancel</a>
+		  		</div>
+		  	</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,98 @@
+<div class="row">
+	<div class="col-xs-12 text-right">
+		<h2>{{participant.first_name}} {{participant.last_name}} - {{exp.name}}</h2>
+	</div>
+	<div class="text-center">
+		<div class="btn-group" role="group">
+			<button type="button" ng-click="changeDimension(true)" class="btn btn-default" ng-class="{'btn-success': exp.third_dimension==true}">
+			3D
+			</button> 
+			<button type="button" ng-click="changeDimension(false)" class="btn btn-default" ng-class="{'btn-success':exp.third_dimension == false}">
+			2D
+			</button> 		
+		</div>	
+	</div>
+</div>
+<hr class="info" />
+<div class="row">
+	<div class="col-sm-4">
+		<b>Total time: </b> {{total_time | number:2}} seconds
+	</div>
+	<div class="col-sm-4 text-center">
+		<b>Total trials: </b> {{exp.trials.length}}
+	</div>
+	<div class="col-sm-4 text-right">
+		<b>Goal found: </b> {{exp.goal_found}}
+	</div>
+</div>
+<div class="row details-section">
+	<div class="col-sm-7">
+		<h3>Trials</h3>
+		<div class="table-responsive">
+		  <table class="table table-striped">
+		    <thead>
+		    	<tr>
+		    		<th>#</th>
+		    		<th>Duration</th>
+		    		<th>Goal Found?</th>
+		    		<th>Path Length</th>
+		    		<th>Goal Q%</th>
+		    	</tr>
+		    </thead>
+		    <tbody>
+		    	<tr ng-repeat="trial in exp.results[0].trials track by $index" ng-class="{'success': display.selected_trial == $index}" ng-click="selectTrial($index)">
+		    		<td>{{$index + 1}}</td>
+		    		<td>{{trial.duration | number:0}} sec.</td>
+		    		<td>{{trial.goal_found ? 'YES' : 'NO'}}{{exp.trials[$index].retention ? ' - RET' : ''}}{{exp.trials[$index].visible ? ' - VIS' : ''}}</td>
+		    		<td>{{trial.path_length | number:2}}</td>
+		    		<td>{{trial.goal_q | number:2}}%</td>
+		    		<td>{{third_dimension}}</td>
+		    	</tr>
+		    </tbody>
+		   </table>
+		</div>
+	</div>
+	<div class="col-sm-5 text-center experiment-summary">
+		<div class="btn-group" role="group">
+		  <button type="button" ng-click="setArenaDisplayMode('results-hm')" class="btn btn-default" ng-class="{'btn-success': arena_config.display_mode == 'results-hm'}">Heat map</button>
+		  <button type="button" ng-click="setArenaDisplayMode('results-path')" class="btn btn-default" ng-class="{'btn-success': arena_config.display_mode == 'results-path'}">Paths</button>
+		  <button type="button" ng-click="setArenaDisplayMode('results-q')" class="btn btn-default" ng-class="{'btn-success': arena_config.display_mode == 'results-q'}">Quadrant</button>
+		</div>
+		<div class="mts">
+			<angular-canvas-helper data-canvas-size="200"/>
+		</div>
+		<div class="pull-right">
+			<small>Path length: {{exp.results[0].trials[display.selected_trial].path_length}}<br/>
+			Trial {{display.selected_trial + 1}}</small>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">
+		<h3>Averages</h3>
+	</div>
+	<div class="col-sm-4">
+		<b>Time: </b>{{avg_time | number: 2}} seconds <br/>
+		<b>Path Length: </b> {{avg_path | number: 2}}
+	</div>
+	<div class="col-sm-4">
+		<b>Time in Q1: </b>{{avg_q1 | number: 2}} seconds <br/>
+		<b>Time in Q2: </b>{{avg_q2 | number: 2}} seconds <br/>
+	</div>
+	<div class="col-sm-4">
+		<b>Time in Q3: </b>{{avg_q3 | number: 2}} seconds <br/>
+		<b>Time in Q4: </b>{{avg_q4 | number: 2}} seconds <br/>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">
+	<br/>
+		<h3>Notes</h3>
+	</div>
+	<div class="col-xs-12">
+		<textarea rows="4" class="form-control" ng-model="notes" id="inputNotes"  placeholder="Add notes regarding the results">{{notes}}</textarea>
+	</div>
+	<div class="col-xs-12">
+		<a class="btn btn-link pull-right" ng-click="saveNotes()" href="" role="button"><small>Save</small></a>
+	</div>
+</div>

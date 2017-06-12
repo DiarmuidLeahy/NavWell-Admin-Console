@@ -1,0 +1,36 @@
+.arena-container {
+	position: relative;
+}
+
+.quadrant {
+	position: absolute;
+	font-size: 2.0em;
+	color: #999;
+}
+
+.q1 {
+	top: 16%;
+	left: 12%;
+}
+
+.q2 {
+	top: 16%;
+	right: 10%;
+}
+
+.q3 {
+	bottom: 20%;
+	left: 12%;
+}
+
+.q4 {
+	bottom: 20%;
+	right: 10%;
+}
+
+.heatmap-container {
+	position: absolute;
+	top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+}

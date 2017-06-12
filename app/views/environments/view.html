@@ -1,0 +1,73 @@
+<div class="row">
+	<div class="col-xs-12 text-right">
+		<h2>{{env.name}}</h2>
+	</div>	
+</div>
+<hr/>
+<div class="row" ng-show="env_loaded">
+	<div class="col-sm-8 col-sm-offset-2 text-center">
+		<angular-canvas-helper data-canvas-size="300"/>
+		<br/>
+	</div>
+</div>
+<div class="row mtm" ng-show="env_loaded">
+	<div class="col-sm-4">
+		Arena size: {{sizes[env.size]}}
+	</div>
+	<div class="col-sm-4 text-center">
+		Total experiments: <b>{{env.total_exp}}</b>
+	</div>
+	<div class="col-sm-4 text-right">
+		<a href="{{clone_url}}">Clone</a> - <a href="" ng-click="show_delete = true">Delete</a>
+	</div>
+	<div class="col-sm-12" ng-if="show_delete">
+		<div class="panel panel-danger mts">
+			<div class="panel-heading">Delete environment</div>
+		  	<div class="panel-body">
+		    	Are you sure you want to delete this environment? Current experiments won't be affected but it will not be available for new experiments.
+		    	<div class="pull-right mts">
+		    	<button type="button" class="btn btn-danger" ng-click="deleteEnvironment()">Delete</button>
+		  		<a class="btn btn-default" ng-click="hideDelete()">Cancel</a>
+		  		</div>
+		  	</div>
+		</div>
+	</div>
+</div>
+<div class="row" ng-show="env_loaded">
+	<div class="col-sm-8 col-sm-offset-2 mtm">
+		<h4>Cues</h4>
+			<div class="table-responsive">
+			  <table class="table table-striped">
+			    <thead>
+			    	<tr>
+			    		<th>#</th>
+			    		<th>Size</th>
+			    		<th>Type</th>
+			    		<th>View</th>
+			    		<th>Colour</th>
+			    	</tr>
+			    </thead>
+			    <tbody>
+			    <tr ng-repeat="cue in arena_config.cues track by $index" ng-class="{'success': $index === arena_config.highlight_cue}">
+			    	<td>{{$index + 1}}</td>
+			    	<td ng-if="cue.size == 'S'">Small</td>
+			    	<td ng-if="cue.size == 'M'">Medium</td>
+			    	<td ng-if="cue.size == 'L'">Large</td>
+			    	<td ng-if="cue.type == 'L'"><span class="glyphicon glyphicon-flash"></span> - {{cue.intensity}}%</td>
+			    	<td ng-if="cue.type == 'C'"><span class="glyphicon glyphicon-adjust circle" style="background-color: #333;"> </span></td>
+			    	<td ng-if="cue.type == 'T'"><span class="glyphicon glyphicon-triangle-top"> </span></td>
+			    	<td ng-if="cue.type == 'S'"><span class="glyphicon glyphicon-stop"> </span></td>
+			    	<td ng-if="cue.type == 'R'"><span class="glyphicon glyphicon-minus"> </span></td>
+			    	<td><a href="" ng-click="viewCue($index)">View</a></td>
+			    	<td ng-if="cue.type == 'L'"><img src="images/white.png" style="max-height:30px;max-width:50px;border: 2px solid grey"></td>
+			    	<td ng-if="cue.colour == 'green' && cue.type != 'L'"><img src="images/green.jpg" style="max-height:30px;max-width:50px;border: 2px solid grey"></td>
+			    	<td ng-if="cue.colour == 'red' && cue.type != 'L'"><img src="images/red.jpg" style="max-height:30px;max-width:50px;border: 2px solid grey"></td>
+			    	<td ng-if="cue.colour == 'blue' && cue.type != 'L'"><img src="images/blue.jpg" style="max-height:30px;max-width:50px;border: 2px solid grey"></td>
+			    	<td ng-if="cue.colour == 'yellow' && cue.type != 'L'"><img src="images/yellow.png" style="max-height:30px;max-width:50px;border: 2px solid grey"></td>
+			    <tr/>
+			    </tbody>
+			   </table>
+			</div>
+	</div>
+</div>
+

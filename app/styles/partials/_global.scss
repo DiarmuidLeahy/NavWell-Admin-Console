@@ -1,0 +1,71 @@
+h2 {
+  margin: 10;
+}
+
+hr {
+  margin-top: 10px;
+  &.info {
+  	margin-bottom: 10px;
+  }
+}
+
+.mtm {
+	margin-top: 30px;
+}
+
+.mts {
+  margin-top: 15px;
+}
+
+.pdsm {
+  padding-top: 25px;
+}
+
+.pvs {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.header-info {
+	padding-top: 12px;
+}
+
+.details-section {
+	margin-top: 15px;
+}
+
+.experiment-summary {
+	margin-top: 20px;
+}
+
+.single-line-input-text {
+	border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+    box-shadow: none;
+
+    &:focus {
+    	box-shadow: none;
+    }
+}
+
+.list-group-item {
+  &.done {
+    color: #777;
+    background-color: #eee;
+  }
+}
+
+.create-experiment-side {
+  padding-top: 45px;
+}
+
+.table > tbody > tr.info > td {
+  background-color: steelblue;
+
+  a {
+    color: white;
+  }
+}
+
