@@ -17,7 +17,8 @@ angular
     'ngTouch',
     'restangular'
   ])
-  .config(function ($routeProvider, RestangularProvider) {
+  .config(function ($routeProvider, $locationProvider, RestangularProvider) {
+    $locationProvider.hashPrefix('');
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
