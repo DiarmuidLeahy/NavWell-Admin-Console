@@ -89,7 +89,7 @@
 				</div>
 				<div class="control text-right"  style="width: 8%;" ng-click="adjustIntensity(1)"><span class="glyphicon glyphicon-plus"> </span></div>
 		  	</div>
-		  	<div ng-if="steps_config.cue_type != 'L'">
+		  	<!-- <div ng-if="steps_config.cue_type != 'L'">
 			  	<div class="col-md-3 col-sm-3 col-lg-3">
 			  		<img src="images/yellow.png" ng-click="setCueColour('yellow')" ng-class="{selected2: steps_config.cue_colour == 'yellow'}" style="max-height:30px;max-width:50px;border: 2px solid grey;margin: 10px">
 			  	</div>
@@ -102,7 +102,7 @@
 			  	<div class="col-md-3 col-sm-3 col-lg-3">
 			  		<img src="images/blue.jpg" ng-click="setCueColour('blue')" ng-class="{selected2: steps_config.cue_colour == 'blue'}" style="max-height:30px;max-width:50px;border: 2px solid grey;margin: 10px">
 			  	</div><br><br><br>
-			 </div>
+			 </div> -->
 		  	<div class="text-center">
 		  		<small><small>Click the border of the arena to add a cue</small></small>
 		  	</div>
@@ -153,7 +153,7 @@
 			    		<th>Size</th>
 			    		<th>Type</th>
 			    		<th>Remove</th>
-			    		<th>Color</th>
+			    		<!-- <th>Color</th> -->
 			    	</tr>
 			    </thead>
 			    <tbody>
@@ -166,11 +166,11 @@
 			    	<td ng-if="cue.type == 'S'"><span class="glyphicon glyphicon-stop"> </span></td>
 			    	<td ng-if="cue.type == 'R'"><span class="glyphicon glyphicon-minus"> </span></td>
 			    	<td><a href="" ng-click="viewCue($index)">View</a> - <a href="" ng-click="removeCue($index)">Remove</a></td>
-			    	<td ng-if="cue.type == 'L'"><img src="images/white.png" style="max-height:30px;max-width:50px;border: 2px solid grey"></td>
+			    	<!-- <td ng-if="cue.type == 'L'"><img src="images/white.png" style="max-height:30px;max-width:50px;border: 2px solid grey"></td>
 			    	<td ng-if="cue.colour == 'green' && cue.type != 'L'"><img src="images/green.jpg" style="max-height:30px;max-width:50px;border: 2px solid grey"></td>
 			    	<td ng-if="cue.colour == 'red' && cue.type != 'L'"><img src="images/red.jpg" style="max-height:30px;max-width:50px;border: 2px solid grey""></td>
 			    	<td ng-if="cue.colour == 'blue' && cue.type != 'L'"><img src="images/blue.jpg" style="max-height:30px;max-width:50px;border: 2px solid grey""></td>
-			    	<td ng-if="cue.colour == 'yellow' && cue.type != 'L'"><img src="images/yellow.png" style="max-height:30px;max-width:50px;border: 2px solid grey""></td>
+			    	<td ng-if="cue.colour == 'yellow' && cue.type != 'L'"><img src="images/yellow.png" style="max-height:30px;max-width:50px;border: 2px solid grey""></td> -->
 			    <tr/>
 			    </tbody>
 			   </table>

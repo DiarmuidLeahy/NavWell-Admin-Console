@@ -16,7 +16,7 @@
 	</div>
 	<div class="col-xs-10 col-sm-11">
 		<div class="participant-description" ng-class="{'full-display': !display.see_more}">{{participant.notes}}</div>
-		<a href="" class="pull-right" ng-if="participant.notes.length > 250 && display.see_more" ng-click="seeMoreNotes()"> See more &#187;</a><!--kcor - not sure if keylor should of put && here, its higlighted in red so there may be an error which needs to be addressed here--> 
+		<a href="" class="pull-right" ng-if="participant.notes.length > 250 && display.see_more" ng-click="seeMoreNotes()"> See more &#187;</a>
 	</div>
 </div>
 <div class="row details-section">
@@ -36,9 +36,9 @@
 		    <tbody>
 		    	<tr ng-repeat="experiment in participant.experiments track by $index" ng-click="showExperimentSummary($index)" ng-class="{'success': display.selected_experiment == $index}">
 
-		    		<td ng-if="!experiment.attempted">-</td><!--kcor - if the experiment has not yet been attempted -->
-		    		<td ng-if="experiment.attempted === experiment.third_dimension">3D</td><!-- kcor - THE ONLY WAY TD CAN BE FALSE IS IF IT WAS ATTEMPTED so if it was attempted and is still true then it must be 3d-->
-		    		<td ng-if="experiment.third_dimension === false">2D</td><!--kcor - THE ONLY WAY TD CAN BE FALSE IS IF IT WAS ATTEMPTED-->
+		    		<td ng-if="!experiment.attempted">-</td>
+		    		<td ng-if="experiment.attempted === experiment.third_dimension">3D</td>
+		    		<td ng-if="experiment.third_dimension === false">2D</td>
 		    		
 		    		
 		    		<td ng-if="experiment.attempted"><a href="#/participants/{{participant.id}}/experiment/{{experiment._id}}">{{experiment.name}}</a></td>
@@ -77,9 +77,9 @@
 		<a class="btn btn-default pull-right" href="" role="button" ng-click="display.add_experiment = false">Close</a>
 	</div>
 	<div class="col-sm-6">
-		<div class="alert mtm alert-warning" role="alert" ng-if="display.selected_experiment >= 0 && !participant.experiments[display.selected_experiment].attempted">The selected experiment has not been taken by the participant</div><!--kcor - not sure if keylor should of put && here, its higlighted in red so there may be an error which needs to be addressed here--> 
+		<div class="alert mtm alert-warning" role="alert" ng-if="display.selected_experiment >= 0 && !participant.experiments[display.selected_experiment].attempted">The selected experiment has not been taken by the participant</div>
 	</div>
-	<div class="col-sm-6 text-center experiment-summary" ng-if="display.selected_experiment >= 0 && participant.experiments[display.selected_experiment].attempted"><!--kcor - not sure if keylor should of put && here, its higlighted in red so there may be an error which needs to be addressed here--> 
+	<div class="col-sm-6 text-center experiment-summary" ng-if="display.selected_experiment >= 0 && participant.experiments[display.selected_experiment].attempted">
 		<div class="btn-group" role="group">
 		  <button type="button" ng-click="setArenaDisplayMode('results-hm')" class="btn btn-default" ng-class="{'btn-success': arena_config.display_mode == 'results-hm'}">Heat map</button>
 		  <button type="button" ng-click="setArenaDisplayMode('results-path')" class="btn btn-default" ng-class="{'btn-success': arena_config.display_mode == 'results-path'}">Paths</button>

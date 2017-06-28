@@ -91,11 +91,6 @@ angular.module('navwellAdminApp')
       $scope.steps_config.steps_done[2] = false;
       $scope.steps_config.steps_done[3] = false;
 
-      //TODO: Change color of octagon on click
-      // if(shape ==='octagon') {
-      //   //rethink
-      //   console.info("------------octagon chosen!------------");
-      // }
       console.log("current step = "+$scope.steps_config.current_step+
                   "\nselected type = "+$scope.steps_config.selected_type+
                   "\nshape - "+$scope.steps_config.selected_shape); 
@@ -107,11 +102,9 @@ angular.module('navwellAdminApp')
            $scope.steps_config.steps_done[0] = true;
   		}
   	}
-    /*Derri start*/
     $scope.setCueColour = function(colour){
       $scope.steps_config.cue_colour = colour;
     }
-    /*Derri End*/
 
   	$scope.setCueSize = function(size){
   		$scope.steps_config.cue_size = size;

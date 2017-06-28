@@ -45,12 +45,10 @@
 					</div>
 					<div class="checkbox">
 					    <label>
-					      <input type="checkbox" ng-click="checkOther('retention')" ng-model="new_trial.retention"> Is Retention? <!-- Need to write a function that checks if the other checkbox is clicked 
-					      																										Don't need this anymore because I've set up the addTrial() function to check if both are checked. If they are, the trial will not be added. Just need to display an error message now.-->
+					      <input type="checkbox" ng-click="checkOther('retention')" ng-model="new_trial.retention"> Is Retention?
 					    </label>
 					  </div>
 					  <div class="checkbox">
-					  <!-- need to ensure that both of these boxes can't be checked together Derri-->
 					    <label>
 					      <input type="checkbox" ng-click="checkOther('visible')" ng-model="new_trial.visible"> Is Visible?
 					    </label>

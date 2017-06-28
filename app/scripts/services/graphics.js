@@ -104,25 +104,23 @@ angular.module('navwellAdminApp')
             //Implementing the ray casting algorithm for determining if a point is within a given polygon.
             //The algorithm "draws" a horizontal line from the point across the positive x-axis.
             //If the line crosses the border of the polygon an odd number of times, the point is outside the polygon.
-            function isInside(point, vs) {
+
+            var vs = polygons[arena_type];;
+            var inside = false;
             
-                var x = point[0], y = point[1];
-                var inside = false;
-                
-                for (var i = 0, j = vs.length - 1; i < vs.length; j = i++) {
+            for (var i = 0, j = vs.length - 1; i < vs.length; j = i++) {
 
-                    var xi = vs[i][0], yi = vs[i][1];
-                    var xj = vs[j][0], yj = vs[j][1];
-                    var intersect = ((yi > y) != (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+                var xi = vs[i][0], yi = vs[i][1];
+                var xj = vs[j][0], yj = vs[j][1];
+                var intersect = ((yi > y) != (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
 
-                    if(intersect) {
-                         inside = !inside;  //flip every time we cross the border of the polygon
-                    }
+                if(intersect) {
+                     inside = !inside;  //flip every time we cross the border of the polygon
                 }
-            
-                return inside;  //If the border has been crossed an even number of times, this will return false
-            };
-            return isInside([x,y],polygons[arena_type]);
+            }
+        
+            return inside;  //If the border has been crossed an even number of times, this will return false
+
     	}
     	return false;
     };
@@ -156,36 +154,32 @@ angular.module('navwellAdminApp')
 
         } else {    //For any regular polygon...
 
-            function isOnBorder(point, vs) {
-                console.info(vs);
+            var x_i = x, y_i = y, vs = polygons[arena_type];
 
-                var x_i = point[0], y_i = point[1];
+            for (var i = 0, j = vs.length - 1; i < vs.length; j = i++) {
 
-                for (var i = 0, j = vs.length - 1; i < vs.length; j = i++) {
+                var x_a = vs[i][0], y_a = vs[i][1];
+                var x_b = vs[j][0], y_b = vs[j][1];
+                //Tells us if the three points are aligned
+                var crossProduct = (y_i - y_a) * (x_b - x_a) - (x_i - x_a) * (y_b - y_a);
 
-                    var x_a = vs[i][0], y_a = vs[i][1];
-                    var x_b = vs[j][0], y_b = vs[j][1];
-                    //Tells us if the three points are aligned
-                    var crossProduct = (y_i - y_a) * (x_b - x_a) - (x_i - x_a) * (y_b - y_a);
+                //Accounting for margin of error
+                if(Math.abs(crossProduct) < 0.025) {
 
-                    if(Math.abs(crossProduct) < 0.025) { //Accounting for margin of error
+                    var dotProduct = (x_i - x_a) * (x_b - x_a) + (y_i - y_a) * (y_b - y_a);
+                    //This, combined with the length between a and b squared, tells us if the click is between a and b
+                    if(dotProduct >= 0) {                       
 
-                        var dotProduct = (x_i - x_a) * (x_b - x_a) + (y_i - y_a) * (y_b - y_a);
-                        //This, combined with the length between a and b squared, tells us if the click is between a and b
-                        if(dotProduct >= 0) {                       
+                        var squareLength_ba = (x_b - x_a)*(x_b - x_a) + (y_b - y_a)*(y_b - y_a);
 
-                            var squareLength_ba = (x_b - x_a)*(x_b - x_a) + (y_b - y_a)*(y_b - y_a);
+                        if(dotProduct <= squareLength_ba) {
 
-                            if(dotProduct <= squareLength_ba) {
-
-                                return [x_i - BODER_ADJ, y_i - BODER_ADJ];
-                            }
+                            return [x_i - BODER_ADJ, y_i - BODER_ADJ];
                         }
                     }
                 }
-                return null;
             }
-            return isOnBorder([x,y],polygons[arena_type]);
+            return null;
 
         }
         return null;
@@ -209,7 +203,7 @@ angular.module('navwellAdminApp')
         };
     };
 
-    var getCue = function(borderPoint, size, type, colour, intensity){  //Added a colour parameter
+    var getCue = function(borderPoint, size, type, colour, intensity){
         var res = {
         point: borderPoint,
         size: size,

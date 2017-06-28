@@ -10,7 +10,7 @@
 angular.module('navwellAdminApp')
   .controller('ExperimentcreateCtrl', function ($scope, $location, $timeout, $routeParams, graphicsService, environmentsService, experimentsService, Restangular) {
 
-	$scope.steps_config = {	//Derri - Need to add extra step to allow for choice of cue colours
+	$scope.steps_config = {
   		current_step: -1, 
   		steps_done: [false, false, false, false],
   		selected_env_name: '',
@@ -30,7 +30,7 @@ angular.module('navwellAdminApp')
 		duration: '',
 		rest: '',
 		retention: false,
-		visible: false	//Derri
+		visible: false
 	};
 
 	$scope.environmentsList = environmentsService.getEnvironments();
@@ -107,13 +107,6 @@ angular.module('navwellAdminApp')
   		$scope.steps_config.selected_trial = -1;
 	};
 
-	// $scope.checkOther = function(id) {				//(Derri) Attempting to ensure that both the retention and visible buttons are not clicked together
-	// 	console.log(id);
-	// 	// if(id ==='ret') {
-
-	// 	// }
-	// };
-
 	$scope.addTrialsDone = function() {
 		if ($scope.trials.length > 0){
 			$scope.steps_config.current_step = 3;
@@ -138,8 +131,6 @@ angular.module('navwellAdminApp')
 			var experiment = {
 				environment: Restangular.stripRestangular($scope.env),
 				name: $scope.name,
-				
-				//kcor - third_dimension: true,//kcor - unnecessaary to initialize as the experiment schema has true as it as true by default
 				
 				trials: $scope.trials
 			}
