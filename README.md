@@ -35,9 +35,10 @@ This step assumes that you have started the database and the API as described in
 > Start the database by opening a command prompt and navigating to `"C:\Program Files\MongoDB\Server\3.4\bin"`. From there, type
 > `mongod`. If you see a message to the effect of `[thread1] waiting for connections on port 27017 `, the service is performing correctly. Leave this window open and open a new command prompt. From here, navigate to where you installed the API ("navwell/api" or similar) and run `node app`
 
-Once the step described above is complete, start the administrator console by navigating to where the app is installed ("navwell/admin") and type 
+Once the step described above is complete, start the administrator console by navigating to where the app is installed ("navwell/admin") and type:
 ```
 grunt serve
 ```
 
 NavWell is now fully installed and you can begin configuring and conducting experiments. The Virtual Reality application can be downloaded from [NavWell VR](https://github.com/DiarmuidLeahy/NavWell-VR "GitHub Repo")
+
