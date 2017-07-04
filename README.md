@@ -40,4 +40,4 @@ Once the step described above is complete, start the administrator console by na
 grunt serve
 ```
 
-NavWell is now fully installed and you can begin configuring and conducting experiments. The Virutal Reality application can be downloaded from [NavWell VR](https://github.com/DiarmuidLeahy/NavWell-VR "GitHub Repo")
+NavWell is now fully installed and you can begin configuring and conducting experiments. The Virtual Reality application can be downloaded from [NavWell VR](https://github.com/DiarmuidLeahy/NavWell-VR "GitHub Repo")
