@@ -20,13 +20,16 @@ The following tools are required before the installation of NavWell. **_Note: Yo
 ## Installing the NavWell Administrator Console
 
 Once each of the above dependencies are installed, you're ready to download and install the NavWell Administrator Console.
-Open a command prompt window and run the following commands:
+Open a command prompt window and run the following commands (Ignore any warnings):
 
   1. `git clone https://github.com/DiarmuidLeahy/NavWell-Admin-Console.git navwell/admin`
   2. `cd navwell/admin`
-  3. `gem install compass`
-  4. `bower install`
-  5. `npm install`
+  4. `npm install -g bower`
+  5. `npm install -g grunt`
+  6. `npm install -g grunt-cli`
+  7. `gem install compass`
+  8. `bower install`
+  9. `npm install`
 
 ## Running the service
 
