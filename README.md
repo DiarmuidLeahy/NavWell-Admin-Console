@@ -5,7 +5,7 @@ NavWell is a Virtual Reality framework to determine memory and spatial navigatio
   - The NavWell Administrator Console which is the interface allowing users to customize experiments and view results
   - A [Virtual Reality application](https://github.com/DiarmuidLeahy/NavWell-VR "GitHub Repo") requiring [Oculus Rift](https://www.oculus.com/rift/ "Oculus website")
   
-**If You haven't already done so, you'll need to install the [NavWell API](https://github.com/DiarmuidLeahy/NavWell-API "GitHub Repo") before installing this administrator console**
+Alt-H1 If you haven't already done so, you'll need to install the [NavWell API](https://github.com/DiarmuidLeahy/NavWell-API "GitHub Repo") before installing this administrator console
 
 
 ## Requirements and Dependencies
