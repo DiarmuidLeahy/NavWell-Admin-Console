@@ -11,7 +11,7 @@ NavWell is a Virtual Reality framework to determine memory and spatial navigatio
 ## Requirements and Dependencies
 
 ### Software
-The following tools are required before the installation of NavWell. Note: You may have already completed this step during the installation of the API. If so, you can skip this step.
+The following tools are required before the installation of NavWell. **_Note: You may have already completed this step during the installation of the API. If so, you can skip this step._**
   
   - [Ruby v2.3.3](https://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-2.3.3-x64.exe "2.3.3")
   - [Node.js v6.11.0](https://nodejs.org/dist/v6.11.0/node-v6.11.0-x64.msi "Latest version")
@@ -41,4 +41,3 @@ grunt serve
 ```
 
 NavWell is now fully installed and you can begin configuring and conducting experiments. The Virtual Reality application can be downloaded from [NavWell VR](https://github.com/DiarmuidLeahy/NavWell-VR "GitHub Repo")
-
