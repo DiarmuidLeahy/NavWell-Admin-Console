@@ -39,5 +39,9 @@ Once the step described above is complete, start the administrator console by na
 ```
 grunt serve
 ```
-
-NavWell is now fully installed and you can begin configuring experiments. Download and extract the NavWell VR App [here](https://github.com/DiarmuidLeahy/NavWell-VR-Executable.git) to conduct experiments.
+It's important to ensure that these steps take place in this order **and in separate command prompts**;
+  1. Start database by navigating to `"C:\Program Files\MongoDB\Server\3.4\bin"` and typing `mongod`
+  2. Start API by navigating to where NavWell is installed ("<your path>/navwell/api") and typing `node app`
+  3. Start Administrator Console by navigating to where NavWell is installed ("<your path>/navwell/admin") and typing `grunt serve`
+  
+NavWell is now fully installed and you can begin configuring experiments. Download and extract the NavWell VR App [here](https://github.com/DiarmuidLeahy/NavWell-VR-Executable/archive/master.zip) to conduct experiments.
