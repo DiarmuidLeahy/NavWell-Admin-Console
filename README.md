@@ -35,13 +35,11 @@ This step assumes that you have started the database and the server as described
 > Start the database by opening a command prompt and navigating to `"C:\Program Files\MongoDB\Server\3.4\bin"`. From there, type
 > `mongod`. If you see a message to the effect of `[thread1] waiting for connections on port 27017 `, the service is performing correctly. Leave this window open and open a new command prompt. From here, navigate to where you installed the API ("navwell/api" or similar) and run `node app`
 
-Once the step described above is complete, start the administrator console by navigating to where the app is installed ("navwell/admin") and type:
-```
-grunt serve
-```
+Once the step described above is complete, start the administrator console by navigating to where the app is installed ("navwell/admin") and type `grunt serve`
+
 It's important to ensure that these steps take place in this order **and in separate command prompts**;
   1. Start database by navigating to `"C:\Program Files\MongoDB\Server\3.4\bin"` and typing `mongod`
-  2. Start API by navigating to where NavWell is installed ("<your path>/navwell/api") and typing `node app`
-  3. Start Administrator Console by navigating to where NavWell is installed ("<your path>/navwell/admin") and typing `grunt serve`
+  2. Start API by navigating to where NavWell is installed ("your_path/navwell/api") and typing `node app`
+  3. Start Administrator Console by navigating to where NavWell is installed ("your_path/navwell/admin") and typing `grunt serve`
   
 NavWell is now fully installed and you can begin configuring experiments. Download and extract the NavWell VR App [here](https://github.com/DiarmuidLeahy/NavWell-VR-Executable/archive/master.zip) to conduct experiments.
